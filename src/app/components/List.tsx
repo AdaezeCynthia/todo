@@ -62,7 +62,7 @@ const List = () => {
           className="p-4 rounded border border-solid border-gray-800"
         />
         <button
-          className="p-4 ml-4 bg-violet-700 rounded hover:bg-violet-900 text-white font-bold"
+          className="p-4 ml-4 bg-green-700 rounded hover:bg-green-500 text-white font-bold"
           onClick={addTodos}
         >
           Add Event
@@ -91,7 +91,7 @@ const List = () => {
             </div>
             <button
               onClick={() => deleteTodo(todo.id)}
-              className="bg-red-600 p-2 rounded hover:bg-red-800 text-white font-bold"
+              className="bg-red-950 p-2 rounded hover:bg-gray-700 text-white font-bold"
             >
               Delete
             </button>
