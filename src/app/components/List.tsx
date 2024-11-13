@@ -136,7 +136,7 @@ const List = () => {
                 onClick={() => startEditing(todo.id, todo.title)}
                 className="bg-blue-600 p-2 rounded-xl hover:bg-blue-800 text-white font-medium"
               >
-                Edit
+                update
               </button>
             )}
 
