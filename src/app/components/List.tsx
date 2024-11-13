@@ -10,6 +10,8 @@ export interface todos {
 const List = () => {
   const [todos, setTodos] = useState<todos[]>([]);
   const [todoName, setTodoName] = useState<string>("");
+  const [editingId, setEditingId] = useState<number | null>(null);
+  const [newTitle, setNewTitle] = useState<string>("");
 
   useEffect(() => {
     try {
@@ -40,6 +42,25 @@ const List = () => {
     const newTodos = todos.filter((todo) => todo.id !== id);
     setTodos(newTodos);
     localStorage.setItem("todos", JSON.stringify(newTodos));
+  };
+  const startEditing = (id: number, currentTitle: string) => {
+    setEditingId(id);
+    setNewTitle(currentTitle);
+  };
+  const cancelEditing = () => {
+    setEditingId(null);
+    setNewTitle("");
+  };
+  const updateTodo = (id: number) => {
+    const newTodos = todos.map((t) => {
+      if (t.id === id) {
+        return { ...t, title: newTitle };
+      }
+      return t;
+    });
+    setTodos(newTodos);
+    localStorage.setItem("todos", JSON.stringify(newTodos));
+    cancelEditing();
   };
 
   const checkTodo = (id: number) => {
@@ -89,9 +110,39 @@ const List = () => {
                 {todo.title}
               </div>
             </div>
+            {editingId === todo.id ? (
+              <div className="flex flex-row space-x-2 items-center">
+                <input
+                  type="text"
+                  value={newTitle}
+                  onChange={(e) => setNewTitle(e.target.value)}
+                  className="p-2 border border-gray-800 rounded"
+                />
+                <button
+                  onClick={() => updateTodo(todo.id)}
+                  className="bg-green-600 p-2 rounded-xl hover:bg-green-800 text-white font-medium"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={cancelEditing}
+                  className="bg-gray-600 p-2 rounded-xl hover:bg-gray-800 text-white font-medium"
+                >
+                  Cancel
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => startEditing(todo.id, todo.title)}
+                className="bg-blue-600 p-2 rounded-xl hover:bg-blue-800 text-white font-medium"
+              >
+                Edit
+              </button>
+            )}
+
             <button
               onClick={() => deleteTodo(todo.id)}
-              className="bg-red-950 p-2 rounded hover:bg-gray-700 text-white font-bold"
+              className="bg-red-950 p-2 rounded-xl hover:bg-gray-700 text-white font-medium "
             >
               Delete
             </button>
