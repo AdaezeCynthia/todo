@@ -80,7 +80,7 @@ const List = () => {
         <textarea
           value={todoName}
           onChange={(e) => setTodoName(e.target.value)}
-          className="p-4 rounded border border-solid border-gray-800"
+          className="p-4 rounded border border-solid  border-gray-800"
         />
         <button
           className="p-4 ml-4 bg-green-700 rounded hover:bg-green-500 text-white font-bold"
@@ -93,9 +93,10 @@ const List = () => {
         {todos.map((todo) => (
           <div
             key={todo.id}
-            className="flex justify-between items-center w-1/3 my-2 bg-gray-600 p-4 bg-opacity-30 border border-solid border-gray-800 rounded"
+            className="flex relative justify-between items-center w-full lg:w-1/2 my-2
+             bg-gray-600 p-4 bg-opacity-30  border border-solid border-gray-800 rounded"
           >
-            <div className="flex flex-row space-x-2">
+            <div className="flex flex-row space-x-2 ">
               <input
                 type="checkbox"
                 checked={todo.completed}
@@ -103,7 +104,7 @@ const List = () => {
                 className="h-6 w-6"
               />
               <div
-                className={`text-xl font-semibold ml-2 ${
+                className={`text-xl font-semibold text-[12px] ml-2 ${
                   todo.completed ? "line-through" : ""
                 }`}
               >
@@ -111,22 +112,22 @@ const List = () => {
               </div>
             </div>
             {editingId === todo.id ? (
-              <div className="flex flex-row space-x-2 items-center">
+              <div className="flex flex-row space-x-2  items-center">
                 <input
                   type="text"
                   value={newTitle}
                   onChange={(e) => setNewTitle(e.target.value)}
-                  className="p-2 border border-gray-800 rounded"
+                  className="p-2 border w-1/3  text-[12px] border-gray-800 rounded"
                 />
                 <button
                   onClick={() => updateTodo(todo.id)}
-                  className="bg-green-600 p-2 rounded-xl hover:bg-green-800 text-white font-medium"
+                  className="bg-green-600 p-2 rounded-xl hover:bg-green-800 text-white text-[12px] font-medium"
                 >
                   Save
                 </button>
                 <button
                   onClick={cancelEditing}
-                  className="bg-gray-600 p-2 rounded-xl hover:bg-gray-800 text-white font-medium"
+                  className="bg-gray-600 p-2 rounded-xl hover:bg-gray-800 text-white text-[12px] font-medium"
                 >
                   Cancel
                 </button>
@@ -134,7 +135,7 @@ const List = () => {
             ) : (
               <button
                 onClick={() => startEditing(todo.id, todo.title)}
-                className="bg-blue-600 p-2 rounded-xl hover:bg-blue-800 text-white font-medium"
+                className="bg-blue-600 p-2 rounded-xl hover:bg-blue-800 text-[12px] text-white font-medium"
               >
                 update
               </button>
@@ -142,7 +143,7 @@ const List = () => {
 
             <button
               onClick={() => deleteTodo(todo.id)}
-              className="bg-red-950 p-2 rounded-xl hover:bg-gray-700 text-white font-medium "
+              className="bg-red-950 p-2 rounded-xl hover:bg-gray-700 text-[12px] text-white font-medium "
             >
               Delete
             </button>
